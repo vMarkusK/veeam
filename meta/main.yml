@@ -8,7 +8,9 @@ galaxy_info:
   - name: Windows
     versions:
      - 2019
+     - 2016
+     - 2012R2
   galaxy_tags: 
-    - Veeam
-    - VMware
+    - veeam
+    - vmware
 dependencies: []
