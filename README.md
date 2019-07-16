@@ -21,6 +21,7 @@ none
 Example Playbook
 ----------------
 
+```
 - name: Add ESXi Host to VBR Server
   hosts: veeam
   gather_facts: no
@@ -59,6 +60,7 @@ Example Playbook
   - name: Debug Veeam Servers from Facts
     debug:
         var: my_facts.veeam_facts.veeam_servers
+```
 
 License
 -------
