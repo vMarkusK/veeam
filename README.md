@@ -1,4 +1,4 @@
-Role Name
+Veeam
 =========
 
 This Role ships Ansible modules for the management of Veeam Backup & Replication.
