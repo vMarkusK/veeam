@@ -1,6 +1,6 @@
 galaxy_info:
   author: Markus Kraus
-  description: Blogger, VMware vExpert and Veeam Vanguard
+  description: This Role ships Ansible modules for the management of Veeam Backup & Replication
   company: mycloudrevolution.com
 
   # If the issue tracker for your role is not on github, uncomment the
