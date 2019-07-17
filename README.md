@@ -1,25 +1,75 @@
-Veeam
-=========
+# Veeam
+
 
 This Role ships Ansible modules for the management of Veeam Backup & Replication.
 
-Requirements
-------------
+## Requirements
 
 The Veeam modules are based on the Veeam PowerShell cmdlets ([Veeam PowerShell Reference](https://helpcenter.veeam.com/docs/backup/powershell/cmdlets.html?ver=95u4)). All modules are designed to be executed on a Veeam Veeam Backup & Replication server with installed console and PowerShell Snapin, no remote connection.
 
-Role Variables
---------------
+## Role Variables
 
 The settable variables depend on the individual module used.
 
-Dependencies
-------------
+## Dependencies
 
 none
 
-Example Playbook
-----------------
+## Example Playbook
+
+### Get Veeam Facts
+
+```
+- name: Get all VBR Facts
+  hosts: veeam
+  gather_facts: no
+  roles:
+  - veeam
+  tasks:
+  - name: Get Veeam Facts
+    veeam_connection_facts:
+    register: my_facts
+  - name: Debug Veeam Facts
+    debug:
+        var: my_facts
+```
+
+### Add Veeam Credentials
+
+```
+- name: Add new Credentials to VBR Server
+  hosts: veeam
+  gather_facts: no
+  roles:
+  - veeam
+  vars:
+    query: "veeam_facts.veeam_credentials[?id=='{{ my_cred.id }}']"
+    my_password: < Dummy >
+  tasks:
+  - name: Add Credential
+    veeam_credential:
+        state: present
+        type: windows
+        username: Administrator
+        password: "{{ my_password }}"
+        description: My dummy description
+    register: my_cred
+  - name: Debug Veeam Credentials
+    debug:
+        var: my_cred
+  - name: Get Veeam Facts
+    veeam_connection_facts:
+    register: my_facts
+  - name: Debug Veeam Credential Facts
+    debug:
+        var: my_facts  | json_query(query)
+  - name: Remove Credential
+    veeam_credential:
+        state: absent
+        id: "{{ my_cred.id }}"
+```
+
+### Add VMware ESXi Host to VBR Server
 
 ```
 - name: Add ESXi Host to VBR Server
@@ -28,13 +78,7 @@ Example Playbook
   roles:
   - veeam
   vars:
-    root_password: !vault |
-          $ANSIBLE_VAULT;1.1;AES256
-          63386666303563306665376261643130346638336531386334323131303631663534383662663237
-          3963343264656633646631366630633765636461396430650a343034363166623039396433386262
-          62346534313736306636333937323635616435633632313937303062333665653236376261623837
-          6364356265613533380a643834643531663230653365303163363338396266613162663465313433
-          31353563386237636330343933643566663536326634356136643839356463346161
+    root_password: < Dummy >
   tasks:
   - name: Add root credential
     veeam_credential:
@@ -62,13 +106,11 @@ Example Playbook
         var: my_facts.veeam_facts.veeam_servers
 ```
 
-License
--------
+## License
 
 GNU Lesser General Public License v3.0
 
-Author Information
-------------------
+## Author Information
 
 Markus Kraus [@vMarkus_K](https://twitter.com/vMarkus_K)
 MY CLOUD-(R)EVOLUTION [mycloudrevolution.com](http://mycloudrevolution.com/)
