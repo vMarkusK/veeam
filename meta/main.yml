@@ -13,4 +13,6 @@ galaxy_info:
   galaxy_tags: 
     - veeam
     - vmware
+    - server
+    - system
 dependencies: []
