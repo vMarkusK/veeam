@@ -15,6 +15,23 @@ The settable variables depend on the individual module used.
 
 none
 
+## Release Notes
+
+### v 0.1
+
+- veeam_connection_facts - Version 0.3
+  - Get Veeam Server Connection
+  - Get Veeam Repositories
+  - Get Veeam Servers
+  - Get Veeam Credentials
+
+- veeam_credential - Version 0.2
+  - Add Windows, Linux or Standard Credential
+  - Remove Credential by ID
+
+- veeam_server - Version 0.2
+  - Add VMware ESXi Server
+
 ## Example Playbook
 
 ### Get Veeam Facts
