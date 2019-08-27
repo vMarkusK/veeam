@@ -11,12 +11,12 @@ ANSIBLE_METADATA = {'metadata_version': '1.1',
 DOCUMENTATION = r'''
 ---
 module: veeam_server
-version_added: '0.2'
+version_added: '0.3'
 short_description: Manages Veeam Servers
 description:
    - With the module you can manage Veeam VBR Server.
    - Add VMware ESXi Servers
-   - Add VMware vCenter Servers #TBD
+   - Add VMware vCenter Servers
    - Remove VMware ESXi Servers #TBD
    - Remove VMware vCenter Servers #TBD
 requirements:

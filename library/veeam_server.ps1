@@ -62,7 +62,10 @@ switch ( $module.Params.state) {
                                     $module.Result.changed = $true
                                     $module.Result.id = $Server.id  
                                 }
-                        "vcenter" {Fail-Json -obj @{} -message "Type not yet implemented."
+                        "vcenter" { $Server = Add-VBRvCenter –Name $module.Params.name -Credentials $Cred
+                                    $module.Result.changed = $true
+                                    $module.Result.id = $Server.id   
+                            
                                     }
                         "windows" {Fail-Json -obj @{} -message "Type not yet implemented."
                                     }

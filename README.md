@@ -17,7 +17,7 @@ none
 
 ## Release Notes
 
-### v 0.1
+### Version 0.1
 
 - veeam_connection_facts - Version 0.3
   - Get Veeam Server Connection
@@ -31,6 +31,10 @@ none
 
 - veeam_server - Version 0.2
   - Add VMware ESXi Server
+
+### Version 0.1
+- veeam_server - Version 0.3
+  - Add VMware vCenter Server
 
 ## Example Playbook
 
