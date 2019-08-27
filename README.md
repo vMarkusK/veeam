@@ -32,7 +32,7 @@ none
 - veeam_server - Version 0.2
   - Add VMware ESXi Server
 
-### Version 0.1
+### Version 0.2
 - veeam_server - Version 0.3
   - Add VMware vCenter Server
 
@@ -119,6 +119,43 @@ none
         credential_id: "{{ root_cred.id }}"
         name: 192.168.234.101
     register: esxi_server
+  - name: Get Veeam Facts
+    veeam_connection_facts:
+    register: my_facts
+  - name: Debug Veeam Servers from Facts
+    debug:
+        var: my_facts.veeam_facts.veeam_servers
+```
+
+### Add VMware vCenter Server to VBR Server
+
+```
+- name: Add vCenter Server to VBR Server
+  hosts: veeam
+  gather_facts: no
+  roles:
+  - veeam
+  vars:
+    vcenter_password: <Dummy>
+  tasks:
+  - name: Add vCenter credential
+    veeam_credential:
+        state: present
+        type: standard
+        username: Administrator@vSphere.local
+        password: "{{ vcenter_password }}"
+        description: "Lab User for vCenter Server"
+    register: vcenter_cred
+  - name: Debug vcenter credential
+    debug:
+        var: vcenter_cred
+  - name: Add vCenter server
+    veeam_server:
+        state: present
+        type: vcenter
+        credential_id: "{{ vcenter_cred.id }}"
+        name: 192.168.234.100
+    register: vcenter_server
   - name: Get Veeam Facts
     veeam_connection_facts:
     register: my_facts
