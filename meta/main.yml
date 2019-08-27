@@ -15,4 +15,5 @@ galaxy_info:
     - vmware
     - server
     - system
+    - backup
 dependencies: []

@@ -36,6 +36,10 @@ none
 - veeam_server - Version 0.3
   - Add VMware vCenter Server
 
+### Version 0.3
+- veeam_backuo - Version 0.1
+  - Add VMware Backuo Job based on tags
+
 ## Example Playbook
 
 ### Get Veeam Facts
