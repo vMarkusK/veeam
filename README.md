@@ -37,7 +37,7 @@ none
   - Add VMware vCenter Server
 
 ### Version 0.3
-- veeam_backuo - Version 0.1
+- veeam_backup - Version 0.1
   - Add VMware Backuo Job based on tags
 
 ## Example Playbook
@@ -166,6 +166,33 @@ none
   - name: Debug Veeam Servers from Facts
     debug:
         var: my_facts.veeam_facts.veeam_servers
+```
+### Add VMware Backup Job based on Tags
+
+```
+- name: Add new Backup Job
+  hosts: veeam
+  gather_facts: no
+  roles:
+  - veeam
+  vars:
+    query: "veeam_facts.veeam_backups[?id=='{{ my_backup.id }}']"
+  tasks:
+  - name: Create Backup Job
+    veeam_backup:
+        state: present
+        type: vi
+        entity: tag
+        tag: "Protection\\\\Default"
+        name: BackupJob01
+        repository: "Default Backup repository"
+    register: my_backup
+  - name: Get Veeam Facts
+    veeam_connection_facts:
+    register: my_facts
+  - name: Debug Veeam Backup Job Facts
+    debug:
+        var: my_facts | json_query(query)
 ```
 
 ## License
