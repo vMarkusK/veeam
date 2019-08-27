@@ -45,6 +45,7 @@ $result = @{
         veeam_repositories = @()
         veeam_servers = @()
         veeam_credentials = @()
+        veeam_backups = @()
     }
 }
 
@@ -77,6 +78,14 @@ try {
 }
 catch {
     Fail-Json -obj $result -message "Failed to get credential details on the target: $($_.Exception.Message)"   
+}
+
+# Get Veeam Backup Jobs
+try {
+    [Array]$BackupJobList = Get-VBRJob | Where-Object {$_.JobType -eq "Backup"}  
+}
+catch {
+    Fail-Json -obj $result -message "Failed to get backup job details on the target: $($_.Exception.Message)"   
 }
 
 # Create result
@@ -117,6 +126,16 @@ foreach ($Cred in $CredList) {
     $cred_info["description"] = $cred.description
 
     $result.veeam_facts.veeam_credentials += $cred_info
+}
+
+foreach ($backup in $BackupJobList) {
+    $backup_info = @{}
+    $backup_info["id"] = $backup.id
+    $backup_info["name"] = $backup.name
+    $backuo_info["jobtype"] = $backup.JobType
+    $backup_info["description"] = $backup.description
+
+    $result.veeam_facts.veeam_backups += $backup_info
 }
 
 # Disconnect
