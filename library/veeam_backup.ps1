@@ -61,7 +61,7 @@ switch ( $module.Params.state) {
     "present" { $Repositroy = Get-VBRBackupRepository -Name $module.Params.repository
                     switch ($module.Params.type) {
                         "vi" {      switch ($module.Params.entity) {
-                                        "tag" { $Entity = Find-VBRViEntity -Tags | Where-Object {$_.Path -match $module.Params.tag} }
+                                        "tag" { $Entity = Find-VBRViEntity -Tags | Where-Object {$_.Path -match "$($module.Params.tag)"} }
                                         "vm" { Fail-Json -obj @{} -message "Type not yet implemented."}
                                         Default { }
                                     }
