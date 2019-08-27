@@ -47,7 +47,7 @@ options:
   tag:
     description:
     - vSphere Tag Category and Tag Name
-    - Example: "Protection\\Default"
+    - Example: "Protection\\\\Default"
     type: str
   name:
     description:
