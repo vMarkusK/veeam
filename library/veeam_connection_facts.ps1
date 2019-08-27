@@ -132,7 +132,7 @@ foreach ($backup in $BackupJobList) {
     $backup_info = @{}
     $backup_info["id"] = $backup.id
     $backup_info["name"] = $backup.name
-    $backuo_info["jobtype"] = $backup.JobType
+    $backup_info["jobtype"] = $backup.JobType
     $backup_info["description"] = $backup.description
 
     $result.veeam_facts.veeam_backups += $backup_info
