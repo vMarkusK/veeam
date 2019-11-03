@@ -56,9 +56,9 @@ Function Disconnect-VeeamServer {
 Connect-VeeamServer
 
 switch ( $module.Params.state) {
-    "present" { $Repositroy = Get-VBRBackupRepository -Name $module.Params.repository
+    "present" { $Repositroy = Get-VBRBackupRepository -Name $module.Params.cacherepository
                     switch ($module.Params.type) {
-                        "nfs" {     $NASServer = Add-VBRNASNFSServer -Path $module.Params.path -CacheRepository $module.Params.cacherepository
+                        "nfs" {     $NASServer = Add-VBRNASNFSServer -Path $module.Params.path -CacheRepository $Repositroy
                                     $module.Result.changed = $true
                                     $module.Result.id = $NASServer.id  
                                 }
